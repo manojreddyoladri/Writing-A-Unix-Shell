@@ -20,3 +20,9 @@ A shell is a user interface that provides access to an operating system's servic
 
 By understanding these features, users can effectively interact with the operating system through various shells and leverage their scripting capabilities for efficient command execution.
 
+After compiling the code with the command `make all`, use the following command to evaluate each test script run:
+
+```sh
+./osh -t < testscripts/testscript.txt > & tmp ; diff tmp testscripts/ea.txt ;
+
+
