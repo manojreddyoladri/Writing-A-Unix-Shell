@@ -60,15 +60,23 @@ After compiling the code with the command `make all`, use the following command 
   osh -t < 1.singleCommand.txt > & tmp ; diff tmp testscripts/ea1.txt ;
   ```
 - **Phase 4 - Implement interprocess communication with pipes `|` to complete the shell **
-  - Allows us to directly pass output from one command into another rather than using a file and redirection. a\
+  - Allows us to directly pass output from one command into another rather than using a file and redirection. 
   - e.g., `osh> ls | grep main`
-  - We use pipes to accomplish this IPC. There is a system call, `pipe()`, that can be used:a\
+  - We use pipes to accomplish this IPC. There is a system call, `pipe()`, that can be used:
     `pipe() - http://man7.org/linux/man-pages/man2/pipe.2.html`
 
-   - “pipes” are either bidirectional or unidirectional data channels, used for IPC. For this project we assume pipes are unidirectional and only pass information in one direction. a\
-   - For this project. using pipes boils down to 3 steps: \a
-     - create the pipe. a\
-     - connect `stdout` of the first command (e.g., `ls`) to one end of the pipe. a\
+   - “pipes” are either bidirectional or unidirectional data channels, used for IPC. For this project we assume pipes are unidirectional and only pass information in one direction. 
+   - For this project. using pipes boils down to 3 steps: 
+     - create the pipe. 
+     - connect `stdout` of the first command (e.g., `ls`) to one end of the pipe. 
      - connect stdin of the next command (e.g., `grep main`) to the other end of the pipe.
+   - The challenge here is to get the timing of the connections correct. The process image is copied upon a call to fork(), so to pass the file descriptors of the pipe along to the child, the pipe needs to be created before the fork. Once this is done, connect the pipes at the beginning of the loop (after `fork()` and before calling `exec()`). We can generalize this as follows:
+     - If the current command is connected to the next command by a pipe:
+       - create a pipe.
+       - store the pipe handles at a temp location.
+       - connect stdout of the current process to the pipe.
+     - If the current command is connected to the previous command by a pipe:
+       - connect the stdin of the current command to the pipe created earlier.
+       
 
 
