@@ -27,4 +27,21 @@ After compiling the code with the command `make all`, use the following command 
 ```
 ## Approach
 
+- **Phase 1 - input parsing
+  - read the input line
+  - tokenize input string to command, arguments and operators
+  - optional store it in a format to make it easy to handle input
+  - identify malformed commands
+
+- **Identifying malformed commands
+  (i) NULL Command
+  eg: `osh> | ls`
+  this is wrong as we have a null command before the |
+  (ii) Missing Files for redirectors
+  eg: `osh> ls >`
+  the output redirector is expecting a file, but it is null in command
+  (iii) Multiple Redirectors
+  eg: `osh> ls > file | cat`
+  in this case, we have two output directors that can be associated to ls. This is ambiguous
+  and thus malformed.
 
