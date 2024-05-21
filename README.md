@@ -45,7 +45,7 @@ After compiling the code with the command `make all`, use the following command 
   in this case, we have two output directors that can be associated to ls. This is ambiguous
   and thus malformed.
 
-- **Phase 2 - Implement handling of logical operators `-` `&&` `||` `;` **
+- **Phase 2 - Implement handling of logical operators `-` `&&` `||` `;`**
   - To implement logical operators a\
     1. Check to see if current and previous commands separated by logical operator a\
     2. If so, get exit status of the previous command a\
@@ -53,13 +53,13 @@ After compiling the code with the command `make all`, use the following command 
     4. If you need to skip the current command set the exit status of the current command to be the same as the previous command. a\
   - This logic is sufficient to handle chains of operators
  
-- **Phase 3 - Implement a program switch for testing (`-t`) **
+- **Phase 3 - Implement a program switch for testing (`-t`)** 
   - Should not print the “osh>” prompt
   - This switch allows us to input an entire file of commands for testing like:
   ```sh
   osh -t < 1.singleCommand.txt > & tmp ; diff tmp testscripts/ea1.txt ;
   ```
-- **Phase 4 - Implement interprocess communication with pipes `|` to complete the shell **
+- **Phase 4 - Implement interprocess communication with pipes `|` to complete the shell**
   - Allows us to directly pass output from one command into another rather than using a file and redirection. 
   - e.g., `osh> ls | grep main`
   - We use pipes to accomplish this IPC. There is a system call, `pipe()`, that can be used:
