@@ -34,14 +34,14 @@ After compiling the code with the command `make all`, use the following command 
   - identify malformed commands
 
 - **Identifying malformed commands
-  (i) NULL Command
-  eg: `osh> | ls`
-  this is wrong as we have a null command before the |
-  (ii) Missing Files for redirectors
-  eg: `osh> ls >`
-  the output redirector is expecting a file, but it is null in command
-  (iii) Multiple Redirectors
-  eg: `osh> ls > file | cat`
-  in this case, we have two output directors that can be associated to ls. This is ambiguous
-  and thus malformed.
+  -(i) NULL Command
+  -eg: `osh> | ls`
+  -this is wrong as we have a null command before the |
+  -(ii) Missing Files for redirectors
+  -eg: `osh> ls >`
+  -the output redirector is expecting a file, but it is null in command
+  -(iii) Multiple Redirectors
+  -eg: `osh> ls > file | cat`
+  -in this case, we have two output directors that can be associated to ls. This is ambiguous
+  -and thus malformed.
 
