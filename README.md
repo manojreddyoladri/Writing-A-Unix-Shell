@@ -24,8 +24,7 @@ After compiling the code with the command `make all`, use the following command 
 
 ```sh
 ./osh -t < testscripts/testscript.txt > & tmp ; diff tmp testscripts/ea.txt ;
-
-
+```
 ## Approach
 
 
