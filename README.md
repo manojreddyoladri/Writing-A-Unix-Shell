@@ -26,3 +26,6 @@ After compiling the code with the command `make all`, use the following command 
 ./osh -t < testscripts/testscript.txt > & tmp ; diff tmp testscripts/ea.txt ;
 
 
+## Approach
+
+
