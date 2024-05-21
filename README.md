@@ -46,12 +46,12 @@ After compiling the code with the command `make all`, use the following command 
   and thus malformed.
 
 - **Phase 2 - Implement handling of logical operators `-` `&&` `||` `;`**
-  - To implement logical operators a\
-    1. Check to see if current and previous commands separated by logical operator a\
-    2. If so, get exit status of the previous command a\
-    3. Based on exit status, determine whether to execute current command a\
-    4. If you need to skip the current command set the exit status of the current command to be the same as the previous command. a\
-  - This logic is sufficient to handle chains of operators
+  - To implement logical operators
+    1. Check to see if current and previous commands separated by logical operator.
+    2. If so, get exit status of the previous command.
+    3. Based on exit status, determine whether to execute current command.
+    4. If you need to skip the current command set the exit status of the current command to be the same as the previous command. 
+  - This logic is sufficient to handle chains of operators.
  
 - **Phase 3 - Implement a program switch for testing (`-t`)** 
   - Should not print the “osh>” prompt
