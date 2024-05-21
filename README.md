@@ -56,7 +56,19 @@ After compiling the code with the command `make all`, use the following command 
 - **Phase 3 - Implement a program switch for testing (`-t`) **
   - Should not print the “osh>” prompt
   - This switch allows us to input an entire file of commands for testing like:
-```sh
-osh -t < 1.singleCommand.txt > & tmp ; diff tmp testscripts/ea1.txt ;
-```
+  ```sh
+  osh -t < 1.singleCommand.txt > & tmp ; diff tmp testscripts/ea1.txt ;
+  ```
+- **Phase 4 - Implement interprocess communication with pipes `|` to complete the shell **
+  - Allows us to directly pass output from one command into another rather than using a file and redirection. a\
+  - e.g., `osh> ls | grep main`
+  - We use pipes to accomplish this IPC. There is a system call, `pipe()`, that can be used:a\
+    `pipe() - http://man7.org/linux/man-pages/man2/pipe.2.html`
+
+   - “pipes” are either bidirectional or unidirectional data channels, used for IPC. For this project we assume pipes are unidirectional and only pass information in one direction. a\
+   - For this project. using pipes boils down to 3 steps: \a
+     - create the pipe. a\
+     - connect `stdout` of the first command (e.g., `ls`) to one end of the pipe. a\
+     - connect stdin of the next command (e.g., `grep main`) to the other end of the pipe.
+
 
