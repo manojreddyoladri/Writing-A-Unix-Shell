@@ -1,34 +1,3 @@
-/*
- * Copyright (c) 2022, Justin Bradley
- *
- * Permission to use, copy, modify, and/or distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
- * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
- * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
- * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
- * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
- * OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
- * PERFORMANCE OF THIS SOFTWARE.
- *
- * Updates:
- * 2022-01-23 Justin: Fixes to handle no spaces after semicolons (courtesy of Jaden
- * Goter)
- * 2022-01-27 Justin: Improved operator handling. Now no weird whitespace issues
- *     The original parser didn't properly tokenize when there were no
- *     spaces around the operators. This was fine in the tests because we never
- *     tested for that case, but it was not robust for student testing. To fix
- *     this, we now just put spaces around all operators before the tokenizer.
- * 2022-01-28 Justin: Fixes for the case where operators come at the end of the string.
- *     The previous version did not handle operators coming at the end of the
- *     command resulting in not handling anomalous input. This didn't manifest
- *     in the tests because the tests were carefully chosen to not exacerbate
- *     these points of weakness. Parser should be more robust now and handle
- *     *most* (if not all) anamolous input.
- */
- 
 #include <sstream>
 #include <regex>
 
@@ -206,7 +175,7 @@ std::vector<shell_command> parse_command_string(const std::string& str)
         }
     }
 
-	// Justin: This is a little hack-ey. Ideally the while loop above would
+	// This is a little hack-ey. Ideally the while loop above would
 	// execute one last time so the state machine could finish. But that's not
 	// easily doable given the architecture. So I just execute the state switch
 	// one last time for the states that could throw an error.
